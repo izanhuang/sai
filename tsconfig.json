@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "nodenext",
+    "target": "es2022",
+    "jsx": "react-jsx"
+  },
+  "strict": "true",
+  "include": ["src", "src/types/globals.d.ts"],
+  "exclude": ["node_modules"]
+}
