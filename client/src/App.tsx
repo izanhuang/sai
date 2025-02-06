@@ -1,9 +1,12 @@
 import logo from './svg/logo.svg'
 import './App.css'
+import startSAI from './services/openAI'
 
 function App() {
+  startSAI()
   return (
     <div className="App">
+      {process.env.REACT_APP_NAME}
       <header className="App-header">
         <img src={logo} className="App-logo" />
         <p>
