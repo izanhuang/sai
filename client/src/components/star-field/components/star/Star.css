@@ -1,0 +1,6 @@
+.star {
+  position: absolute;
+  background-color: white;
+  box-shadow: 0 0 8px white;
+  border-radius: 50%;
+}

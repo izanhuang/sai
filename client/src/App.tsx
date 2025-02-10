@@ -1,10 +1,10 @@
 import './App.css'
-import ChatBox from './components/chat-box/ChatBox'
+import LandingPage from './pages/LandingPage'
 
 function App() {
   return (
     <div className="App">
-      <ChatBox />
+      <LandingPage />
     </div>
   )
 }
