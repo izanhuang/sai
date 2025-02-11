@@ -1,21 +1,40 @@
-import Star from './components/star/Star'
+import { motion, MotionValue, useScroll, useTransform } from 'framer-motion'
+import { useRef } from 'react'
+import Stars from './components/stars/Stars'
 import './StarField.css'
 
-function StarField() {
-  const stars = Array.from({ length: 30 }, (_, i) => ({
-    id: `star-${i}`,
-    top: Math.random() * 50 + 'vh',
-    left: Math.random() * 100 + 'vw',
-    size: Math.random() * 2 + 'px',
-    delay: Math.random() * 2,
-  }))
+function useParallax(value: MotionValue<number>, distance: number) {
+  return useTransform(value, [0, 1], [-distance, distance])
+}
+
+function StarField({
+  key,
+  content,
+  text,
+}: {
+  key: number
+  content: string
+  text: string
+}) {
+  const ref = useRef(null)
+  const { scrollYProgress } = useScroll({ target: ref })
+  const y = useParallax(scrollYProgress, 300)
 
   return (
-    <div className="star-field">
-      {stars.map((star) => (
-        <Star key={star.id} {...star} />
-      ))}
-    </div>
+    <section key={key} className="star-field">
+      <div ref={ref}>
+        {content}
+        <Stars />
+      </div>
+      <motion.div
+        className="star-field__text"
+        initial={{ visibility: 'hidden' }}
+        animate={{ visibility: 'visible' }}
+        style={{ y }}
+      >
+        {text}
+      </motion.div>
+    </section>
   )
 }
 

@@ -1,6 +1,7 @@
 import Messages from '../messages/Messages'
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
+import './ChatBox.css'
 
 const ChatBox = () => {
   // Prevent double useEffect call
@@ -36,7 +37,7 @@ const ChatBox = () => {
   }, [])
 
   return (
-    <div>
+    <div className="chat-box">
       <input value={input} onChange={handleInputChange} />
       <button type="submit" onClick={handleEnter}>
         Enter
