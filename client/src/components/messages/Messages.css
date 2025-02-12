@@ -1,0 +1,17 @@
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.message {
+  display: inline-block;
+}
+
+.message__user {
+  align-self: flex-end;
+}
+
+.message__assistant {
+  align-self: flex-start;
+}

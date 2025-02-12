@@ -16,12 +16,17 @@ const ChatBox = () => {
   }
 
   async function handleEnter() {
-    const response = await axios.post('/api/assistant/chat', {
-      message: input,
-      threadId,
-    })
-    console.log(response)
-    setMessages(response.data.messages)
+    axios
+      .post('/api/assistant/chat', {
+        message: input,
+        threadId,
+      })
+      .then((response) => {
+        console.log(response)
+        setMessages(response.data.messages)
+        setInput('')
+      })
+      .catch((error) => console.error(error))
   }
 
   async function initiate() {
@@ -37,12 +42,24 @@ const ChatBox = () => {
   }, [])
 
   return (
-    <div className="chat-box">
-      <input value={input} onChange={handleInputChange} />
-      <button type="submit" onClick={handleEnter}>
-        Enter
-      </button>
+    <div className="chat-box glass-card">
       {messages && messages.length > 0 && <Messages messages={messages} />}
+      <div className="chat-box__input-container">
+        <textarea
+          className="chat-box__input"
+          placeholder="Message SAI"
+          type="text"
+          value={input}
+          onChange={handleInputChange}
+        />
+        <button
+          type="submit"
+          className="chat-box__submit"
+          onClick={handleEnter}
+        >
+          Enter
+        </button>
+      </div>
     </div>
   )
 }

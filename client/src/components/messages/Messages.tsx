@@ -1,4 +1,5 @@
 import Message from './Message'
+import './Messages.css'
 
 type MessagesProps = {
   messages: {
@@ -16,9 +17,13 @@ type MessagesProps = {
 
 const Messages = ({ messages }: MessagesProps) => {
   return (
-    <div>
+    <div className="messages">
       {messages.map((message) => (
-        <Message key={message.id} message={message.content[0].text.value} />
+        <Message
+          key={message.id}
+          message={message.content[0].text.value}
+          role={message.role}
+        />
       ))}
     </div>
   )

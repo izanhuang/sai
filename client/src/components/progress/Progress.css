@@ -3,7 +3,8 @@
   left: 0;
   right: 0;
   height: 5px;
-  background: #4ff0b7;
-  bottom: 50px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  bottom: 1rem;
   transform: scaleX(0);
 }

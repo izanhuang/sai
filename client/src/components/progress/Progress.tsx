@@ -9,7 +9,19 @@ function Progress() {
     restDelta: 0.001,
   })
 
-  return <motion.div className="progress" style={{ scaleX }} />
+  return (
+    <motion.div
+      className="progress"
+      initial={{ opacity: 0.3, scale: 1 }}
+      animate={{ opacity: 1, scale: 1.25 }}
+      transition={{
+        duration: 5,
+        repeat: Infinity,
+        repeatType: 'reverse',
+      }}
+      style={{ scaleX }}
+    />
+  )
 }
 
 export default Progress

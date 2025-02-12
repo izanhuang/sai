@@ -59,7 +59,7 @@ async function sendMessageToAssistant(userMessage, threadId) {
     // Get the messages with pagination
     const params = {
       order: "asc",
-      limit: 5,
+      // limit: 5,
     };
     // if (lastMessageId) {
     //   params.after = lastMessageId;

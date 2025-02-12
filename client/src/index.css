@@ -1,6 +1,6 @@
 html {
   scroll-snap-type: y mandatory;
-  background-color: black;
+  background: linear-gradient(135deg, #321446, #0a0a28, #0f0f46, #162447);
 }
 
 body {
