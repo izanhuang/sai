@@ -47,7 +47,7 @@ const ChatBox = () => {
       <div className="chat-box__input-container">
         <textarea
           className="chat-box__input"
-          placeholder="Message SAI"
+          placeholder="Send a message..."
           type="text"
           value={input}
           onChange={handleInputChange}
@@ -57,7 +57,7 @@ const ChatBox = () => {
           className="chat-box__submit"
           onClick={handleEnter}
         >
-          Enter
+          <span className="chat-box__submit-icon">🏹</span>
         </button>
       </div>
     </div>

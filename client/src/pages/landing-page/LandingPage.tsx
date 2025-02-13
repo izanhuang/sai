@@ -1,25 +1,23 @@
 import './LandingPage.css'
 import ChatBox from '../../components/chat-box/ChatBox'
-import StarField from '../../components/star-field/StarField'
+import ParallaxSection from '../../components/parallax-section/ParallaxSection'
 import HeroText from './components/hero-text/HeroText'
 import Progress from '../../components/progress/Progress'
 
 function LandingPage() {
-  const views = [
+  const sections = [
     {
-      text: <HeroText />,
-      content: undefined,
+      title: <HeroText />,
     },
     {
-      text: undefined,
       content: <ChatBox />,
     },
   ]
 
   return (
     <div>
-      {views.map(({ content, text }, i) => (
-        <StarField key={i} content={content} text={text} />
+      {sections.map(({ content, title }, i) => (
+        <ParallaxSection key={i} content={content} title={title} />
       ))}
       <Progress />
     </div>

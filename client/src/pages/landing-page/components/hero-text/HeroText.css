@@ -1,9 +1,26 @@
-.hero-text_title,
-.hero-text_subtitle {
+.hero-text__title,
+.hero-text__subtitle,
+.hero-text__caption {
   color: #a8c7ff;
-  margin: 0;
-  font-size: 50px;
-  font-weight: 700;
-  letter-spacing: -3px;
   line-height: 1.2;
+}
+
+.hero-text__title {
+  font-size: 3.125rem;
+  font-weight: 600;
+  letter-spacing: -3px;
+  margin: 0;
+}
+
+.hero-text__subtitle {
+  font-size: 2.125rem;
+  letter-spacing: -3px;
+  margin: 0;
+  font-weight: normal;
+}
+
+.hero-text__caption {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 1rem;
 }
