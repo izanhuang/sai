@@ -1,4 +1,4 @@
-import './Messages.css'
+import './Message.css'
 import { motion } from 'framer-motion'
 
 type MessageProps = {
@@ -18,6 +18,7 @@ const Message = ({ key, message, role }: MessageProps) => {
         duration: 0.4,
         ease: [0, 0.71, 0.2, 1],
       }}
+      layout
     >
       {message}
     </motion.p>

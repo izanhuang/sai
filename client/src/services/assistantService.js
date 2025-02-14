@@ -1,18 +1,16 @@
 import axios from 'axios'
 
 const initiateAssistant = async (callback, errorHandler) => {
-  await axios
-    .post('/api/assistant/initiate')
-    .then((response) => {
-      callback({
-        threadId: response.data.threadId,
-        messages: response.data.messages,
-      })
+  try {
+    const response = await axios.post('/api/assistant/initiate')
+    callback({
+      threadId: response.data.threadId,
+      messages: response.data.messages,
     })
-    .catch((error) => {
-      console.error(error)
-      errorHandler()
-    })
+  } catch (error) {
+    console.error(error)
+    errorHandler()
+  }
 }
 
 const sendMessageToAssistant = async (
@@ -21,32 +19,28 @@ const sendMessageToAssistant = async (
   callback,
   errorHandler
 ) => {
-  await axios
-    .post('/api/assistant/sendMessage', {
+  try {
+    const response = await axios.post('/api/assistant/sendMessage', {
       message: input,
       threadId,
     })
-    .then((response) => {
-      callback({ messages: response.data.messages })
-    })
-    .catch((error) => {
-      console.error(error)
-      errorHandler()
-    })
+    callback({ messages: response.data.messages })
+  } catch (error) {
+    console.error(error)
+    errorHandler()
+  }
 }
 
-const getAssistantResponse = async (threadId, callback, errorHandler) => {
-  await axios
-    .post('/api/assistant/getReply', {
+const getAssistantReply = async (threadId, callback, errorHandler) => {
+  try {
+    const response = await axios.post('/api/assistant/getReply', {
       threadId,
     })
-    .then((response) => {
-      callback({ messages: response.data.messages })
-    })
-    .catch((error) => {
-      console.error(error)
-      errorHandler()
-    })
+    callback({ messages: response.data.messages })
+  } catch (error) {
+    console.error(error)
+    errorHandler()
+  }
 }
 
-export { initiateAssistant, sendMessageToAssistant, getAssistantResponse }
+export { initiateAssistant, sendMessageToAssistant, getAssistantReply }

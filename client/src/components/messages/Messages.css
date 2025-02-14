@@ -10,31 +10,12 @@
 }
 
 .messages__error {
-  position: absolute;
-  bottom: 0;
+  position: fixed;
+  bottom: 8rem;
   left: 50%;
   border: 1px solid firebrick;
   border-radius: 30px;
   padding: 0.5rem 1rem;
   background-color: firebrick;
   max-width: 90%;
-}
-
-.message {
-  display: inline-block;
-  margin: 0;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-}
-
-.message__user {
-  align-self: flex-end;
-  background-color: var(--light-gray-20);
-  border: 1px solid purple;
-}
-
-.message__assistant {
-  align-self: flex-start;
-  background-color: var(----light-gray-10);
-  border: 1px solid var(--light-gray-20);
 }

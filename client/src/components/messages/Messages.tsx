@@ -1,6 +1,8 @@
-import Message from './Message'
+import LoadingMessage from './loading-message/LoadingMessage'
+import Message from './message/Message'
 import './Messages.css'
 import { motion } from 'framer-motion'
+import { useRef, useEffect } from 'react'
 
 type MessagesProps = {
   messages: {
@@ -8,15 +10,26 @@ type MessagesProps = {
     role: string
     text: string
   }[]
+  isLoading: boolean
   hasError: boolean
 }
 
-const Messages = ({ messages, hasError }: MessagesProps) => {
+const Messages = ({ messages, isLoading, hasError }: MessagesProps) => {
+  const messagesRef = useRef(null)
+
+  useEffect(() => {
+    messagesRef.current?.scrollTo({
+      top: messagesRef.current.scrollHeight,
+      behavior: 'smooth',
+    })
+  }, [messages])
+
   return (
-    <div className="messages">
+    <div ref={messagesRef} className="messages">
       {messages.map((message) => (
         <Message key={message.id} message={message.text} role={message.role} />
       ))}
+      {isLoading && <LoadingMessage />}
       {hasError && (
         <motion.div
           className="messages__error"

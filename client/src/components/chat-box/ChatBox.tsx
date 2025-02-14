@@ -4,8 +4,13 @@ import './ChatBox.css'
 import {
   initiateAssistant,
   sendMessageToAssistant,
-  getAssistantResponse,
+  getAssistantReply,
 } from '../../services/assistantService'
+
+const stingSound = new Audio(
+  'https://cdn.freesound.org/previews/578/578801_10522382-lq.mp3'
+)
+stingSound.volume = 0.25
 
 const ChatBox = () => {
   // Prevent double useEffect call
@@ -37,14 +42,26 @@ const ChatBox = () => {
   }
 
   async function handleEnter() {
-    setIsLoading(true)
-    const callback = ({ messages }) => {
-      setHasError(false)
-      setMessages(messages)
-      setInputValue('')
+    if (inputValue.trim() === '') {
+      return
     }
-    await sendMessageToAssistant(threadId, inputValue, callback, handleError)
-    await getAssistantResponse(threadId, callback, handleError)
+    setIsLoading(true)
+    setHasError(false)
+    const sendCallback = ({ messages }) => {
+      setInputValue('')
+      stingSound.play()
+      setMessages(messages)
+    }
+    const replyCallback = ({ messages }) => {
+      setMessages(messages)
+    }
+    await sendMessageToAssistant(
+      threadId,
+      inputValue,
+      sendCallback,
+      handleError
+    )
+    await getAssistantReply(threadId, replyCallback, handleError)
     setIsLoading(false)
   }
 
@@ -64,7 +81,11 @@ const ChatBox = () => {
   return (
     <div className="chat-box glass-card">
       {messages && messages.length > 0 && (
-        <Messages messages={messages} hasError={hasError} />
+        <Messages
+          messages={messages}
+          isLoading={isLoading}
+          hasError={hasError}
+        />
       )}
       <div className="chat-box__input-container">
         <textarea

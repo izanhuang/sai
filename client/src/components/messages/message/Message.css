@@ -1,0 +1,20 @@
+.message {
+  display: inline-block;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  white-space: pre;
+  text-wrap: wrap;
+}
+
+.message__user {
+  align-self: flex-end;
+  background-color: var(--light-gray-20);
+  border: 1px solid purple;
+}
+
+.message__assistant {
+  align-self: flex-start;
+  background-color: var(----light-gray-10);
+  border: 1px solid var(--light-gray-20);
+}
