@@ -1,0 +1,15 @@
+:root {
+  --light-gray: #f5f5f5;
+  --light-gray-10: rgba(225, 225, 225, 0.1);
+  --light-gray-20: rgba(225, 225, 225, 0.2);
+  --white: #fff;
+  --white-05: rgba(225, 225, 225, 0.05);
+  --white-30: rgba(255, 255, 255, 0.3);
+  --white-50: rgba(255, 255, 255, 0.5);
+
+  --soft-blue: #a8c7ff;
+
+  --black-20: rgba(0, 0, 0, 0.2);
+
+  --light-text: var(--light-gray);
+}

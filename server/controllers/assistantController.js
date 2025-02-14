@@ -9,7 +9,7 @@ async function initiateAssistant(req, res) {
   }
 }
 
-async function chatWithAssistant(req, res) {
+async function sendMessageToAssistant(req, res) {
   try {
     const { message, threadId } = req.body;
     const assistantResponse = await assistantService.sendMessageToAssistant(
@@ -22,7 +22,20 @@ async function chatWithAssistant(req, res) {
   }
 }
 
+async function getAssistantResponse(req, res) {
+  try {
+    const { threadId } = req.body;
+    const assistantResponse = await assistantService.getAssistantResponse(
+      threadId
+    );
+    res.status(200).json(assistantResponse);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
 export default {
   initiateAssistant,
-  chatWithAssistant,
+  sendMessageToAssistant,
+  getAssistantResponse,
 };

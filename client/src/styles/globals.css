@@ -20,13 +20,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  border-radius: 0.625rem;
-  background-color: rgba(225, 225, 225, 0.1);
+  border-radius: 20px;
+  background-color: var(--light-gray-10);
 }
 
 ::-webkit-scrollbar-track {
   background-color: transparent;
-  margin: 0.5rem 0;
 }
 
 code {
@@ -40,4 +39,8 @@ h3,
 h4,
 h5 {
   font-family: 'Ubuntu', 'Segoe UI', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
 }

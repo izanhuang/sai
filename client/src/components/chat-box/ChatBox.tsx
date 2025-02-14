@@ -1,38 +1,58 @@
 import Messages from '../messages/Messages'
 import { useState, useEffect, useRef } from 'react'
-import axios from 'axios'
 import './ChatBox.css'
+import {
+  initiateAssistant,
+  sendMessageToAssistant,
+  getAssistantResponse,
+} from '../../services/assistantService'
 
 const ChatBox = () => {
   // Prevent double useEffect call
   const hasRun = useRef(false)
 
   const [threadId, setThreadId] = useState('')
-  const [input, setInput] = useState('')
+  const [inputValue, setInputValue] = useState('')
   const [messages, setMessages] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
+  const [hasError, setHasError] = useState(false)
 
-  function handleInputChange(event) {
-    setInput(event.target.value)
-  }
-
-  async function handleEnter() {
-    axios
-      .post('/api/assistant/chat', {
-        message: input,
-        threadId,
-      })
-      .then((response) => {
-        console.log(response)
-        setMessages(response.data.messages)
-        setInput('')
-      })
-      .catch((error) => console.error(error))
+  function handleError() {
+    setHasError(true)
   }
 
   async function initiate() {
-    const response = await axios.post('/api/assistant/initiate')
-    setThreadId(response.data.threadId)
-    setMessages(response.data.messages)
+    setIsLoading(true)
+    const callback = ({ threadId: initialThreadId, messages }) => {
+      setHasError(false)
+      setThreadId(initialThreadId)
+      setMessages(messages)
+    }
+    await initiateAssistant(callback, handleError)
+    setIsLoading(false)
+  }
+
+  function handleInputChange(event) {
+    setInputValue(event.target.value)
+  }
+
+  async function handleEnter() {
+    setIsLoading(true)
+    const callback = ({ messages }) => {
+      setHasError(false)
+      setMessages(messages)
+      setInputValue('')
+    }
+    await sendMessageToAssistant(threadId, inputValue, callback, handleError)
+    await getAssistantResponse(threadId, callback, handleError)
+    setIsLoading(false)
+  }
+
+  function handleKeyDown(event) {
+    if (!event.shiftKey && event.key === 'Enter') {
+      event.preventDefault()
+      handleEnter()
+    }
   }
 
   useEffect(() => {
@@ -43,19 +63,24 @@ const ChatBox = () => {
 
   return (
     <div className="chat-box glass-card">
-      {messages && messages.length > 0 && <Messages messages={messages} />}
+      {messages && messages.length > 0 && (
+        <Messages messages={messages} hasError={hasError} />
+      )}
       <div className="chat-box__input-container">
         <textarea
           className="chat-box__input"
           placeholder="Send a message..."
           type="text"
-          value={input}
+          value={inputValue}
+          disabled={isLoading}
           onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
         />
         <button
           type="submit"
           className="chat-box__submit"
           onClick={handleEnter}
+          disabled={isLoading}
         >
           <span className="chat-box__submit-icon">🏹</span>
         </button>

@@ -1,7 +1,7 @@
 .hero-text__title,
 .hero-text__subtitle,
 .hero-text__caption {
-  color: #a8c7ff;
+  color: var(--soft-blue);
   line-height: 1.2;
 }
 

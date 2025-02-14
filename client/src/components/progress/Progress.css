@@ -3,7 +3,7 @@
   left: 0;
   right: 0;
   height: 5px;
-  background: rgba(255, 255, 255, 0.1);
+  background-color: var(--light-gray-10);
   border-radius: 0.625rem;
   bottom: 1rem;
   transform: scaleX(0);
