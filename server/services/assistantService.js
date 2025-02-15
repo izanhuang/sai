@@ -20,7 +20,7 @@ async function startAssistantSession() {
       role: "assistant",
       text: firstMessage.content[0].text.value,
     };
-    console.log(`Assistant session started: ${JSON.stringify(threadId)}`);
+    console.log(`Assistant session started: ${threadResponse.id}`);
 
     return {
       threadId: threadResponse.id,

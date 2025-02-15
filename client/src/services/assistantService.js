@@ -1,8 +1,10 @@
 import axios from 'axios'
 
+const apiUrl = process.env.REACT_APP_API_URL
+
 const initiateAssistant = async (callback, errorHandler) => {
   try {
-    const response = await axios.post('/api/assistant/initiate')
+    const response = await axios.post(`${apiUrl}/api/assistant/initiate`)
     callback({
       threadId: response.data.threadId,
       messages: response.data.messages,
@@ -20,7 +22,7 @@ const sendMessageToAssistant = async (
   errorHandler
 ) => {
   try {
-    const response = await axios.post('/api/assistant/sendMessage', {
+    const response = await axios.post(`${apiUrl}/api/assistant/sendMessage`, {
       message: input,
       threadId,
     })
@@ -33,7 +35,7 @@ const sendMessageToAssistant = async (
 
 const getAssistantReply = async (threadId, callback, errorHandler) => {
   try {
-    const response = await axios.post('/api/assistant/getReply', {
+    const response = await axios.post(`${apiUrl}/api/assistant/getReply`, {
       threadId,
     })
     callback({ messages: response.data.messages })
