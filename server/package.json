@@ -5,8 +5,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "build": "echo 'No build step needed for backend'",
-    "postinstall": "npm install"
+    "build": "echo 'No build step needed for backend'"
   },
   "author": "Izan Huang",
   "license": "ISC",
