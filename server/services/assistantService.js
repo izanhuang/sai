@@ -20,6 +20,7 @@ async function startAssistantSession() {
       role: "assistant",
       text: firstMessage.content[0].text.value,
     };
+    console.log(`Assistant session started: ${JSON.stringify(threadId)}`);
 
     return {
       threadId: threadResponse.id,
@@ -42,7 +43,7 @@ async function sendMessageToAssistant(userMessage, threadId) {
       role: message.role,
       text: message.content[0].text.value,
     }));
-    console.log(`Message content: ${JSON.stringify(formattedMessages)}`);
+    console.log(`Message sent: ${JSON.stringify(userMessage)}`);
 
     return { threadId, messages: formattedMessages };
   } catch (error) {
@@ -66,7 +67,7 @@ async function getAssistantResponse(threadId) {
 
     return { threadId, messages: formattedMessages };
   } catch (error) {
-    throw new Error("Error sending message: " + error.message);
+    throw new Error("Error creating reply: " + error.message);
   }
 }
 
